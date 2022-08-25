@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <Editor
-        height="90vh"
+        height="30vh"
         defaultLanguage="javascript"
         defaultValue="// ここにコードを書いてください"
         onMount={handleEditorDidMount}
