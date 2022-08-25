@@ -1,18 +1,24 @@
 import "./App.css";
 import "./reset.css";
 
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import Question from "./component/Question.jsx";
 
 function App() {
+  const [isPassed, setAsPassed] = useState(false);
   const editorRef = useRef(null);
 
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
   }
 
-  function showValue() {
+  function test() {
+    alert(editorRef.current.getValue());
+    setAsPassed(true);
+  }
+
+  function submitCode() {
     alert(editorRef.current.getValue());
   }
 
@@ -26,7 +32,11 @@ function App() {
         defaultValue="// ここにコードを書いてください"
         onMount={handleEditorDidMount}
       />
-      <button onClick={showValue}>Show value</button>
+      {!isPassed ? (
+        <button onClick={test}>テストを実行する</button>
+      ) : (
+        <button onClick={submitCode}>提出する</button>
+      )}
       <footer>Morpho</footer>
     </>
   );
