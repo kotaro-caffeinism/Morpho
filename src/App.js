@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import "./App.css";
+import "./reset.css";
+
+import React, { useRef } from "react";
+import Editor from "@monaco-editor/react";
 
 function App() {
+  const editorRef = useRef(null);
+
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor;
+  }
+
+  function showValue() {
+    alert(editorRef.current.getValue());
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Editor
+        height="90vh"
+        defaultLanguage="javascript"
+        defaultValue="// ここにコードを書いてください"
+        onMount={handleEditorDidMount}
+      />
+      <button onClick={showValue}>Show value</button>
+    </>
   );
 }
 
