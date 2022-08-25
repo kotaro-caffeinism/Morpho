@@ -1,9 +1,9 @@
-// import logo from './logo.svg';
 import "./App.css";
 import "./reset.css";
 
 import React, { useRef } from "react";
 import Editor from "@monaco-editor/react";
+import Question from "./component/Question.jsx";
 
 function App() {
   const editorRef = useRef(null);
@@ -18,6 +18,8 @@ function App() {
 
   return (
     <>
+      <header>Morpho</header>
+      <Question />
       <Editor
         height="30vh"
         defaultLanguage="javascript"
@@ -25,6 +27,7 @@ function App() {
         onMount={handleEditorDidMount}
       />
       <button onClick={showValue}>Show value</button>
+      <footer>Morpho</footer>
     </>
   );
 }
