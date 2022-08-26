@@ -5,21 +5,43 @@ import React, { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import Question from "./component/Question.jsx";
 
+import _ from "lodash";
+
 function App() {
   const [isPassed, setAsPassed] = useState(false);
-  const editorRef = useRef(null);
+
+  const monacoRef = useRef(null);
+
+  function handleEditorWillMount(monaco) {
+    monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+  }
 
   function handleEditorDidMount(editor, monaco) {
-    editorRef.current = editor;
+    monacoRef.current = editor;
   }
 
   function test() {
-    alert(editorRef.current.getValue());
-    setAsPassed(true);
+    const studentCode = JSON.stringify(monacoRef.current.getValue());
+    const arg = studentCode.match(/(?<=\().*?(?=\))/)[0];
+    const expression = studentCode
+      .match(/(?<=\{).*?(?=\})/)[0]
+      .replace(/\\n|\\r\\n|\\r/g, "");
+    const actual = new Function(arg, expression)(1);
+    const expected = 1;
+
+    if (_.isEqual(actual, expected)) {
+      setAsPassed(true);
+      alert("Test Passed!");
+    } else {
+      console.error("Test FAILED. Keep trying!");
+      console.log("    actual: ", actual);
+      console.log("  expected: ", expected);
+      console.trace();
+    }
   }
 
   function submitCode() {
-    alert(editorRef.current.getValue());
+    alert("提出を受け付けました！");
   }
 
   return (
@@ -30,6 +52,7 @@ function App() {
         height="30vh"
         defaultLanguage="javascript"
         defaultValue="// ここにコードを書いてください"
+        beforeMount={handleEditorWillMount}
         onMount={handleEditorDidMount}
       />
       {!isPassed ? (
