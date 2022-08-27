@@ -1,10 +1,13 @@
-require("dotenv").config({ path: "./.env.local" });
+require("dotenv").config({ path: ".env.local" });
+
+console.log(process.env.DB_USER);
 
 module.exports = {
   client: "pg",
   connection:
     process.env.DATABASE_URL ||
-    `postgres://localhost:5432/morpho?user=${process.env.DB_USER}&password={process.env.DB_PASSWORD}`,
+    `postgres://${process.env.DB_USER}:{process.env.DB_PASSWORD}@localhost:5432/morpho`,
   searchPath: "public",
   migrations: { directory: "./migrations" },
+  seeds: { directory: "./seeds" },
 };

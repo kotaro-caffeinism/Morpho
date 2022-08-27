@@ -19,10 +19,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server",
+    "hack": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha ./src/spec/test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .js --ext .jsx ."
   },
   "eslintConfig": {
     "extends": [
@@ -42,7 +44,7 @@
       "last 1 safari version"
     ]
   },
-  "main": "index.js",
   "author": "Kotaro <hideandhide35@gmail.com>",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "proxy": "http://localhost:9000"
 }
