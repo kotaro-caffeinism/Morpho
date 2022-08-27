@@ -2,12 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App.js";
+import Admin from "./component/Admin.jsx";
 import reportWebVitals from "./reportWebVitals.js";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <header>Morpho</header>
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="admin" element={<Admin />} />
+        {/* <Route path="/*" element={<NotFound/>} /> */}
+      </Routes>
+    </Router>
+    <footer>Morpho</footer>
   </React.StrictMode>
 );
 
