@@ -6,6 +6,7 @@ const fs = require("fs");
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "..", "build")));
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
@@ -13,6 +14,18 @@ app.get("/", (req, res) => {
 
 app.get("/admin", async (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+});
+
+app.post("/admin", async (req, res) => {
+  // req.body じゃ出なかった。なぜ…
+  // react だから？ json は出なかったとか
+  res.send(req.body.comment);
+
+  // knex("students_result")
+  // .update({
+  //   instructor_comment: comment,
+  // })
+  // .where("id", id);
 });
 
 app.get("/api/students-result", async (req, res) => {

@@ -12,6 +12,7 @@
     "knex": "^2.2.0",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.34.0",
+    "nodemon": "^2.0.19",
     "pg": "^8.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -20,7 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node server",
+    "start": "nodemon server",
     "hack": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

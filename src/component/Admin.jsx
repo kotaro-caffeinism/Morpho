@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import axios from "axios"
 
 function Admin() {
   const [data, setData] = useState(null);
@@ -10,17 +9,11 @@ function Admin() {
       .then((data) => setData(data));
   }, []);
 
-  // useEffect(()=>{
-  //   fetch('https://source.unsplash.com/random').then(data => setImage(data.url))
-  // }, []);
-
   return (
     <>
-      {console.log(data, "data")}
+      <h2>データ一覧</h2>
       {data
         ? data.map((val, i) => {
-            console.log(val, "val");
-            console.log(val.isPassed, "val");
             return (
               <div key={i}>
                 <p>{val.id}</p>
@@ -30,6 +23,14 @@ function Admin() {
             );
           })
         : ""}
+      <h2>コメントを残す</h2>
+      <form action="" method="POST">
+        <label for="id">id</label>
+        <input type="text" name="id" required />
+        <label for="comment">コメント</label>
+        <input type="text" name="comment" required />
+        <input type="submit" value="Submit Comment" />
+      </form>
     </>
   );
 }

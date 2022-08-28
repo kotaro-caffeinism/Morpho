@@ -1,7 +1,5 @@
 require("dotenv").config({ path: ".env.local" });
 
-console.log(process.env.DB_USER);
-
 module.exports = {
   client: "pg",
   connection:
