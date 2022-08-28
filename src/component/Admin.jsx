@@ -17,7 +17,8 @@ function Admin() {
             return (
               <div key={i}>
                 <p>{val.id}</p>
-                <p>{val.students_code}</p>
+                <p>{val.code}</p>
+                <p>{val.instructor_comment ? val.instructor_comment : ""}</p>
                 <p>{String(val.isPassed)}</p>
               </div>
             );

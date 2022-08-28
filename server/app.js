@@ -20,11 +20,8 @@ app.post("/admin", async (req, res) => {
   // req.body じゃ出なかった。なぜ…
   // react だから？ json は出なかったとか
 
-  console.log(req.body.id);
-  console.log(req.body.comment);
-
-  await db("students_result").where("id", req.body.id).update({
-    instructor_comments: req.body.comment,
+  await db("result").where("id", req.body.id).update({
+    instructor_comment: req.body.comment,
   });
 
   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
@@ -32,10 +29,10 @@ app.post("/admin", async (req, res) => {
 
 app.get("/api/students-result", async (req, res) => {
   try {
-    const results = await db.select().table("students_result");
-    res.json(results);
+    const result = await db.select().table("result");
+    res.json(result);
   } catch (err) {
-    console.error("Error loading results!", err);
+    console.error("Error loading result data!", err);
     res.sendStatus(500);
   }
 });
