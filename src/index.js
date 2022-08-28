@@ -2,24 +2,31 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App.js";
+import Home from "./component/Home.jsx";
 import Admin from "./component/Admin.jsx";
 import SignUp from "./component/SignUp.jsx";
+import Login from "./component/Login.jsx";
 import reportWebVitals from "./reportWebVitals.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <header>Morpho</header>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="admin" element={<Admin />} />
-        <Route path="signup" element={<SignUp />} />
-        {/* <Route path="/*" element={<NotFound/>} /> */}
-      </Routes>
-    </Router>
-    <footer>Morpho</footer>
+    <AuthProvider>
+      <header>Morpho</header>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="assessment" element={<App />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="login" element={<Login />} />
+          {/* <Route path="/*" element={<NotFound/>} /> */}
+        </Routes>
+      </Router>
+      <footer>Morpho</footer>
+    </AuthProvider>
   </React.StrictMode>
 );
 
