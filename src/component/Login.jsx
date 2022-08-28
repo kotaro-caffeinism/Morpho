@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth, provider } from "../firebase";
+import auth, { provider } from "../firebase";
 import { useNavigate, Navigate } from "react-router-dom";
 
 const Login = () => {
