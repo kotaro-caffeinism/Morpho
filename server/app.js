@@ -27,6 +27,14 @@ app.post("/admin", async (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
 });
 
+app.get("/signup", async (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+});
+
+app.get("/login", async (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+});
+
 app.get("/api/students-result", async (req, res) => {
   try {
     const result = await db.select().table("result");
