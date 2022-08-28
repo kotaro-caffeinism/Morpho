@@ -46,7 +46,6 @@ function App() {
 
   return (
     <>
-      <header>Morpho</header>
       <Question />
       <Editor
         height="30vh"
@@ -60,7 +59,6 @@ function App() {
       ) : (
         <button onClick={submitCode}>提出する</button>
       )}
-      <footer>Morpho</footer>
     </>
   );
 }
