@@ -5,10 +5,15 @@ import React, { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import Question from "./component/Question.jsx";
 
+import { auth } from "./firebase";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useAuthContext } from "./context/AuthContext";
+
 import _ from "lodash";
 
 function App() {
   const [isPassed, setAsPassed] = useState(false);
+  const { user } = useAuthContext();
 
   const monacoRef = useRef(null);
 
@@ -44,7 +49,9 @@ function App() {
     alert("提出を受け付けました！");
   }
 
-  return (
+  return !user ? (
+    <Navigate to="/login" />
+  ) : (
     <>
       <Question />
       <Editor
