@@ -19,13 +19,15 @@ app.get("/admin", async (req, res) => {
 app.post("/admin", async (req, res) => {
   // req.body じゃ出なかった。なぜ…
   // react だから？ json は出なかったとか
-  res.send(req.body.comment);
 
-  // knex("students_result")
-  // .update({
-  //   instructor_comment: comment,
-  // })
-  // .where("id", id);
+  console.log(req.body.id);
+  console.log(req.body.comment);
+
+  await db("students_result").where("id", req.body.id).update({
+    instructor_comments: req.body.comment,
+  });
+
+  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
 });
 
 app.get("/api/students-result", async (req, res) => {
