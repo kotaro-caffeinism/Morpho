@@ -12,14 +12,37 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
 });
 
+app.get("/assessment", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+});
+
+app.post("/assessment", async (req, res) => {
+  // await db.raw("SELECT SETVAL ('result_id_seq', 1, false)");
+
+  console.log(req.body, "req.body");
+  console.log(req.body.code, "req.body.code");
+  // console.log(await JSON.parse(req.body), "parsed req.body");
+  // console.log(await req.body.code, "req.body.code");
+
+  // const id = 10000;
+
+  // const nextId = id[0].max + 1;
+  // console.log(nextId, "nextId");
+
+  await db("result").insert([
+    // { id },
+    { code: req.body.code },
+    { isPassed: true },
+  ]);
+
+  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+});
+
 app.get("/admin", async (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
 });
 
 app.post("/admin", async (req, res) => {
-  // req.body じゃ出なかった。なぜ…
-  // react だから？ json は出なかったとか
-
   await db("result").where("id", req.body.id).update({
     instructor_comment: req.body.comment,
   });

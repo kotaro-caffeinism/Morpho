@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Morpho - アセスメント自動採点アプリ
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+このリポジトリは Code Chrysalis の生徒であるときに作成しました。
 
-## Available Scripts
+This was created during my time as a student at Code Chrysalis.
 
-In the project directory, you can run:
+## このアプリについて
 
-### `npm start`
+[Heroku](https://morpho-production.herokuapp.com/) でこのアプリのデモを確認できます。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+問題に沿ってユーザーから送信されたコードを自動で採点し、結果を保存してくれるツールです。
+管理者はユーザーに対しコメントを残すことができます。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 使用しているライブラリ
 
-### `npm test`
+- Frontend: React, monaco-editor-react
+- Backend: knex, express, react-dom-router
+- DB: postgres
+- Deploy: Heroku
+- サインアップ / ログイン機能: Firebase 認証
+- ユーザーのコードテスト用: lodash
+- 実行環境: Node.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## セットアップ
 
-### `npm run build`
+このアプリを動かすためには、以下の手順で環境のセットアップを行なってください。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Downloading and installing steps
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+repository を clone します。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+$ git clone https://github.com/codechrysalis/cct1-project.continuous-delivery-react-team2.git
+```
 
-### `npm run eject`
+repository に移動します。
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+$ cd cct1-project.continuous-delivery-react-team2
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+dependencies をインストールします。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+$ npm init
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+サーバーの立ち上げ。
+データテーブルの作成と、migration、 seed の実行を同時に行います。
+[localhost:9000](localhost:9000) で確認できます。
 
-## Learn More
+```
+$ npm run start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### その他のコマンド
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ホットリロードで React を起動する
 
-### Code Splitting
+```
+$ npm run hack
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+静的ファイルを build する
 
-### Analyzing the Bundle Size
+```
+$ npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## このアプリができること
 
-### Making a Progressive Web App
+- ユーザーが送信したコードの採点（問題は 1 種類）
+  - 現象はフィボナッチ数列の問題が表示されていますが、テストできるのは「1 を返す関数」のみです 😢
+- Gmail か メールアドレス + パスワード を使ってサインアップ（/signup）ログイン（/login）することができます。Heroku で試す場合テスト用として以下をご利用ください。
+  - メール: bayegofun@rapt.be
+  - パスワード: JiKqfP@w\*(0y
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 今後の開発予定
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] 問題数を増やす
+- [ ] 生徒 1 人につき 1 アカウント
+- [ ] ニックネーム機能
+- [ ] インストラクターがコメントすると生徒にメール通知が来る機能
+- [ ] 管理者画面（/admin）を管理者のみに限定
+- [ ] 管理者は管理画面でユーザーの試行回数、正誤、解くのにかかった時間、最終的なコードを確認できる
+- [ ] 生徒が自分のアセスメント機能を見直せる機能
+- [ ] Github 認証
+- [ ] メールでのサインアップ通知
+- [ ] 管理者はユーザーが行なった一連の操作を動画で確認できる
+- [ ] コホートごとの分析機能
+- [ ] Google Spread Sheet への書き出し機能
