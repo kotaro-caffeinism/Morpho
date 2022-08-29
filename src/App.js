@@ -9,6 +9,7 @@ import { auth } from "./firebase";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuthContext } from "./context/AuthContext";
 
+import fetch from "node-fetch";
 import _ from "lodash";
 
 function App() {
@@ -45,8 +46,17 @@ function App() {
     }
   }
 
-  function submitCode() {
+  // not working
+  async function submitCode() {
+    const studentCode = JSON.stringify(monacoRef.current.getValue());
+    console.log(studentCode, "studentCode ");
+
+    const response = await fetch("/assessment", {
+      method: "POST",
+      body: studentCode,
+    });
     alert("提出を受け付けました！");
+    console.log(response, "res");
   }
 
   return !user ? (
@@ -64,6 +74,7 @@ function App() {
       {!isPassed ? (
         <button onClick={test}>テストを実行する</button>
       ) : (
+        // not working
         <button onClick={submitCode}>提出する</button>
       )}
     </>
